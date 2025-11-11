@@ -7,25 +7,24 @@
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
-    background: url('images/makena-maui-hawaii-sunset-beach-shoreline-palm-trees-16x9.avif') no-repeat center center fixed;
-    background-size: cover;
-    background-color: rgba(255,255,255,0.7);
-    background-blend-mode: lighten;
+    background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #74b9ff 100%);
     margin: 0;
     padding: 0;
     color: #333;
+    min-height: 100vh;
   }
   header {
     text-align: center;
     padding: 20px;
-    background: rgba(244,197,122,0.8);
+    background: rgba(244,197,122,0.9);
     color: #3b2e06;
     font-weight: bold;
     font-size: 1.1em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
   nav {
     text-align: center;
-    background: linear-gradient(to right, rgba(244,197,122,0.7), rgba(255,220,178,0.7), rgba(254,250,241,0.7));
+    background: linear-gradient(to right, rgba(244,197,122,0.9), rgba(255,220,178,0.9), rgba(254,250,241,0.9));
     padding: 12px 0;
     position: sticky;
     top: 0;
@@ -47,84 +46,152 @@
     background: #d4983d;
     padding: 6px 10px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  }
-  nav::before {
-    content: '🌴  Aloha Menu  🌴';
-    display: block;
-    font-family: 'Papyrus', cursive;
-    color: #3b2e06;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-bottom: 8px;
   }
   h2 {
-    background: rgba(255,220,178,0.75);
+    background: rgba(255,220,178,0.85);
     padding: 10px;
     border-radius: 8px;
+    margin-top: 0;
   }
   .section {
     margin: 15px;
-    padding: 10px;
-    background: rgba(255,248,238,0.7);
+    padding: 15px;
+    background: rgba(255,248,238,0.95);
     border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
   .item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 8px 0;
-  }
-  .item img {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: cover;
-    margin-right: 10px;
-    cursor: pointer;
-    display: none;
-  }
-  button {
-    border: none;
-    background: #4da6ff;
-    color: white;
-    font-size: 1.2em;
-    padding: 5px 10px;
+    margin: 12px 0;
+    flex-wrap: wrap;
+    padding: 8px;
+    background: rgba(255,255,255,0.6);
     border-radius: 8px;
   }
-  button:active {
-    background: #1e90ff;
+  .item > span:first-child {
+    font-weight: 600;
+    color: #2c1b00;
   }
-  #lightbox {
-    display: none;
-    position: fixed;
-    z-index: 200;
-    left: 0; top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
+  .qty-controls {
+    display: flex;
     align-items: center;
+    gap: 8px;
   }
-  #lightbox img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 10px;
-  }
-  #closeBtn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2em;
-    color: white;
+  .qty-controls button {
+    font-size: 1.4em;
+    border: 2px solid #d4983d;
+    background: #fff;
+    color: #d4983d;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s;
+    font-weight: bold;
+  }
+  .qty-controls button:hover {
+    background: #d4983d;
+    color: #fff;
+  }
+  .qty-controls span {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0;
+    width: 100%;
+  }
+  .checkbox-group label {
+    background: rgba(212,152,61,0.2);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .checkbox-group label:hover {
+    background: rgba(212,152,61,0.4);
+  }
+  select {
+    padding: 6px 10px;
+    border: 2px solid #d4983d;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.95em;
+    margin: 4px;
+    cursor: pointer;
+  }
+  input[type="text"], textarea {
+    padding: 8px;
+    border: 2px solid #d4983d;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 4px 0;
+    font-family: inherit;
+    font-size: 0.95em;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+  #note {
+    width: calc(100% - 30px);
+    margin: 20px 15px;
+    padding: 12px;
+    font-size: 1em;
+    min-height: 80px;
+  }
+  button#send, button#clear {
+    display: block;
+    width: calc(100% - 30px);
+    margin: 10px 15px;
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  button#send {
+    background: linear-gradient(135deg, #d4983d, #f4c57a);
+    color: white;
+    box-shadow: 0 4px 12px rgba(212,152,61,0.4);
+  }
+  button#send:hover {
+    background: linear-gradient(135deg, #c98e35, #e0b56d);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(212,152,61,0.5);
+  }
+  button#clear {
+    background: linear-gradient(135deg, #95a5a6, #bdc3c7);
+    color: white;
+  }
+  button#clear:hover {
+    background: linear-gradient(135deg, #7f8c8d, #95a5a6);
+    transform: translateY(-2px);
+  }
+  footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(244,197,122,0.9);
+    color: #3b2e06;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 20px;
   }
 </style>
 </head>
 <body>
-<header>“Whatever you do, do it from the heart, as something done for the Lord.” — Colossians 3:23</header>
-
+<header>"Whatever you do, do it from the heart, as something done for the Lord." — Colossians 3:23</header>
 <nav>
   <a href="#breakfast">Breakfast</a> |
   <a href="#lunch">Lunch</a> |
@@ -132,66 +199,203 @@
   <a href="#drinks">Drinks</a>
 </nav>
 
+<!-- 🥞 Breakfast Section -->
 <div id="breakfast" class="section">
   <h2>🥞 Breakfast Blessings</h2>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/Honey-Nut-Cheerios.png" alt="Honey Nut Cheerios" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Honey Nut Cheerios</span></div><div><button onclick="updateItem('Cheerios',-1)">−</button><span id="Cheerios">0</span><button onclick="updateItem('Cheerios',1)">+</button></div></div>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/oatmeal.png" alt="Oatmeal" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Oatmeal</span></div><div><button onclick="updateItem('Oatmeal',-1)">−</button><span id="Oatmeal">0</span><button onclick="updateItem('Oatmeal',1)">+</button></div></div>
+  <div class="item"><span>Cinnamon Apple Oatmeal</span><div class="qty-controls"><button onclick="updateQty('Oatmeal',-1)">−</button><span id="Oatmeal">0</span><button onclick="updateQty('Oatmeal',1)">+</button></div></div>
+  <div class="item"><span>Vanilla Greek Yogurt</span><div class="qty-controls"><button onclick="updateQty('Yogurt',-1)">−</button><span id="Yogurt">0</span><button onclick="updateQty('Yogurt',1)">+</button></div></div>
+  <div class="item"><span>Chia Seed Pudding</span><div class="qty-controls"><button onclick="updateQty('Chia',-1)">−</button><span id="Chia">0</span><button onclick="updateQty('Chia',1)">+</button></div></div>
+  <div class="item"><span>Eggs</span><select id="EggsStyle"><option>Scrambled</option><option>Over Easy</option></select><div class="qty-controls"><button onclick="updateQty('Eggs',-1)">−</button><span id="Eggs">0</span><button onclick="updateQty('Eggs',1)">+</button></div></div>
+  <div class="item"><span>Egg Omelet</span><div class="checkbox-group"><label><input type="checkbox" value="Cheese">Cheese</label><label><input type="checkbox" value="Peppers">Peppers</label><label><input type="checkbox" value="Ham">Ham</label><label><input type="checkbox" value="Turkey Sausage">Turkey Sausage</label></div><div class="qty-controls"><button onclick="updateQty('Omelet',-1)">−</button><span id="Omelet">0</span><button onclick="updateQty('Omelet',1)">+</button></div></div>
+  <div class="item"><span>Toast</span><select id="ToastBread"><option>White</option><option>Nine Grain</option><option>Sourdough</option></select><select id="ToastTopping"><option>Butter</option><option>Avocado</option><option>Honey</option><option>Strawberry Jam</option></select><div class="qty-controls"><button onclick="updateQty('Toast',-1)">−</button><span id="Toast">0</span><button onclick="updateQty('Toast',1)">+</button></div></div>
+  <div class="item"><span>Potatoes</span><div class="qty-controls"><button onclick="updateQty('Potatoes',-1)">−</button><span id="Potatoes">0</span><button onclick="updateQty('Potatoes',1)">+</button></div></div>
+  <div class="item"><span>Bacon</span><div class="qty-controls"><button onclick="updateQty('Bacon',-1)">−</button><span id="Bacon">0</span><button onclick="updateQty('Bacon',1)">+</button></div></div>
+  <div class="item"><span>Sausage</span><div class="qty-controls"><button onclick="updateQty('Sausage',-1)">−</button><span id="Sausage">0</span><button onclick="updateQty('Sausage',1)">+</button></div></div>
+  <div class="item"><span>Cottage Cheese</span><div class="qty-controls"><button onclick="updateQty('Cottage',-1)">−</button><span id="Cottage">0</span><button onclick="updateQty('Cottage',1)">+</button></div></div>
+  <div class="item"><span>Honey Nut Cheerios</span><div class="checkbox-group"><label><input type="checkbox" value="Marshmallows">Add Marshmallows</label></div><div class="qty-controls"><button onclick="updateQty('Cheerios',-1)">−</button><span id="Cheerios">0</span><button onclick="updateQty('Cheerios',1)">+</button></div></div>
 </div>
 
+<!-- 🥪 Lunch Section -->
 <div id="lunch" class="section">
   <h2>🥪 Lunch Roundup</h2>
-  <div class="item"><div style="display:flex;align-items:center;"><span>White Rice</span></div><div><button onclick="updateItem('WhiteRice',-1)">−</button><span id="WhiteRice">0</span><button onclick="updateItem('WhiteRice',1)">+</button></div></div>
-  <div class="item"><div style="display:flex;align-items:center;"><span>Seasoned Diced Chicken</span></div><div><button onclick="updateItem('Chicken',-1)">−</button><span id="Chicken">0</span><button onclick="updateItem('Chicken',1)">+</button></div></div>
+  <div class="item"><span>White Rice</span><div class="checkbox-group"><label><input type="checkbox" value="Black Beans">Black Beans</label><label><input type="checkbox" value="Tuna">Tuna</label><label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label></div><div class="qty-controls"><button onclick="updateQty('Rice',-1)">−</button><span id="Rice">0</span><button onclick="updateQty('Rice',1)">+</button></div></div>
+  <div class="item"><span>Steak</span><div class="qty-controls"><button onclick="updateQty('Steak',-1)">−</button><span id="Steak">0</span><button onclick="updateQty('Steak',1)">+</button></div></div>
+  <div class="item"><span>Potatoes</span><div class="qty-controls"><button onclick="updateQty('LunchPotatoes',-1)">−</button><span id="LunchPotatoes">0</span><button onclick="updateQty('LunchPotatoes',1)">+</button></div></div>
+  <div class="item"><span>Vegetables</span><select id="VegOptions"><option>Corn</option><option>Green Beans</option></select><div class="qty-controls"><button onclick="updateQty('Vegetables',-1)">−</button><span id="Vegetables">0</span><button onclick="updateQty('Vegetables',1)">+</button></div></div>
+  <div class="item"><span>Salad</span><div class="checkbox-group"><label><input type="checkbox" value="Cheese">Cheese</label><label><input type="checkbox" value="Chicken">Chicken</label><label><input type="checkbox" value="Croutons">Croutons</label></div><select id="SaladDressing"><option>Ranch</option><option>Caesar</option></select><div class="qty-controls"><button onclick="updateQty('Salad',-1)">−</button><span id="Salad">0</span><button onclick="updateQty('Salad',1)">+</button></div></div>
+  <div class="item"><span>Sandwich</span><select id="SandwichBread"><option>White</option><option>Sourdough</option><option>Wheat</option></select><div class="checkbox-group"><label><input type="checkbox" value="Cheese">Cheese</label><label><input type="checkbox" value="Lettuce">Lettuce</label><label><input type="checkbox" value="Tomatoes">Tomatoes</label><label><input type="checkbox" value="Ham">Ham</label><label><input type="checkbox" value="Turkey">Turkey</label><label><input type="checkbox" value="Pepperoni">Pepperoni</label></div><div class="qty-controls"><button onclick="updateQty('Sandwich',-1)">−</button><span id="Sandwich">0</span><button onclick="updateQty('Sandwich',1)">+</button></div></div>
+  <div class="item"><span>Panda Express</span><select id="PandaMain"><option>Rice</option><option>Chow Mein</option></select><div class="checkbox-group"><label><input type="checkbox" value="Orange Chicken">Orange Chicken</label><label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label><label><input type="checkbox" value="Honey Walnut Shrimp">Honey Walnut Shrimp</label></div><input type="text" id="OtherSide" placeholder="Other side (if different)"><input type="text" id="PandaSauce" placeholder="Sauces"><div class="qty-controls"><button onclick="updateQty('Panda',-1)">−</button><span id="Panda">0</span><button onclick="updateQty('Panda',1)">+</button></div></div>
+  <div class="item"><span>McDonalds</span><textarea id="McDOrder" placeholder="Enter order (include drink/fries if wanted)..."></textarea><div class="qty-controls"><button onclick="updateQty('McDonalds',-1)">−</button><span id="McDonalds">0</span><button onclick="updateQty('McDonalds',1)">+</button></div></div>
 </div>
 
+<!-- 🍎 Snacks Section -->
 <div id="snacks" class="section">
   <h2>🍎 Snack Shack</h2>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/Gold-Fish.png" alt="Gold Fish" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Gold Fish</span></div><div><button onclick="updateItem('GoldFish',-1)">−</button><span id="GoldFish">0</span><button onclick="updateItem('GoldFish',1)">+</button></div></div>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/Peanut-Butter-Chocolate-Mix.png" alt="Peanut Butter Chocolate Mix" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Peanut Butter Chocolate Mix</span></div><div><button onclick="updateItem('PBMix',-1)">−</button><span id="PBMix">0</span><button onclick="updateItem('PBMix',1)">+</button></div></div>
+  <div class="item"><span>Goldfish Crackers</span><div class="qty-controls"><button onclick="updateQty('Goldfish',-1)">−</button><span id="Goldfish">0</span><button onclick="updateQty('Goldfish',1)">+</button></div></div>
+  <div class="item"><span>Saltines</span><div class="qty-controls"><button onclick="updateQty('Saltines',-1)">−</button><span id="Saltines">0</span><button onclick="updateQty('Saltines',1)">+</button></div></div>
+  <div class="item"><span>Honey Stinger Mini Waffles</span><div class="qty-controls"><button onclick="updateQty('Waffles',-1)">−</button><span id="Waffles">0</span><button onclick="updateQty('Waffles',1)">+</button></div></div>
+  <div class="item"><span>Mint Chocolate Chip FIT CRUNCH</span><div class="qty-controls"><button onclick="updateQty('FitCrunch',-1)">−</button><span id="FitCrunch">0</span><button onclick="updateQty('FitCrunch',1)">+</button></div></div>
+  <div class="item"><span>Hershey Bar</span><div class="qty-controls"><button onclick="updateQty('Hershey',-1)">−</button><span id="Hershey">0</span><button onclick="updateQty('Hershey',1)">+</button></div></div>
+  <div class="item"><span>Fruit</span>
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="Red Grapes"> Red Grapes</label>
+      <label><input type="checkbox" value="Strawberries"> Strawberries</label>
+      <label><input type="checkbox" value="Watermelon"> Watermelon</label>
+      <label><input type="checkbox" value="Sliced Apple Honey Crisp"> Sliced Apple Honey Crisp</label>
+    </div>
+    <div class="qty-controls"><button onclick="updateQty('Fruit',-1)">−</button><span id="Fruit">0</span><button onclick="updateQty('Fruit',1)">+</button></div>
+  </div>
 </div>
 
+<!-- 🥤 Drinks Section -->
 <div id="drinks" class="section">
   <h2>🥤 Drinks</h2>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/Premier-Protein-Vanilla.png" alt="Premier Protein Vanilla Shake" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Premier Protein - Vanilla Shake</span></div><div><button onclick="updateItem('Protein',-1)">−</button><span id="Protein">0</span><button onclick="updateItem('Protein',1)">+</button></div></div>
-  <div class="item"><div style="display:flex;align-items:center;"><img src="images/Dads-Special-Protein-Shake.png" alt="Dad's Special Protein Shake" onload="this.style.display='inline-block'" onclick="openLightbox(this.src)"><span>Dad's Special Protein Shake</span></div><div><button onclick="updateItem('DadsProtein',-1)">−</button><span id="DadsProtein">0</span><button onclick="updateItem('DadsProtein',1)">+</button></div></div>
+  <div class="item"><span>Dad's Special Protein Shake</span><div class="qty-controls"><button onclick="updateQty('ProteinShake',-1)">−</button><span id="ProteinShake">0</span><button onclick="updateQty('ProteinShake',1)">+</button></div></div>
+  <div class="item"><span>Large Iced Chai (Starbucks)</span><textarea id="ChaiNote" placeholder="Oat milk, brown sugar cold foam, 2 pumps vanilla"></textarea><div class="qty-controls"><button onclick="updateQty('Chai',-1)">−</button><span id="Chai">0</span><button onclick="updateQty('Chai',1)">+</button></div></div>
+  <div class="item"><span>Strawberry & Pineapple Smoothie</span><div class="qty-controls"><button onclick="updateQty('Smoothie',-1)">−</button><span id="Smoothie">0</span><button onclick="updateQty('Smoothie',1)">+</button></div></div>
+  <div class="item"><span>Starbucks (Custom)</span><textarea id="StarbucksOrder" placeholder="Enter Starbucks order (include size)..."></textarea><div class="qty-controls"><button onclick="updateQty('Starbucks',-1)">−</button><span id="Starbucks">0</span><button onclick="updateQty('Starbucks',1)">+</button></div></div>
 </div>
 
-<div id="lightbox"><span id="closeBtn" onclick="closeLightbox()">×</span><img id="lightboxImg" src="" alt="Expanded Food Image"></div>
+<textarea id="note" placeholder="Add note for Dad (extra syrup, special request, etc.)"></textarea>
+<button id="send" onclick="sendOrder()">📱 Send Order to Dad</button>
+<button id="clear" onclick="clearOrder()">🔄 Clear Order</button>
+
+<footer>Love, Dad 🤎✝️</footer>
 
 <script>
-function updateItem(item, change) {
-  const el = document.getElementById(item);
-  let count = parseInt(el.textContent) + change;
+function updateQty(id, change) {
+  const el = document.getElementById(id);
+  let count = parseInt(el.textContent);
+  count += change;
   if (count < 0) count = 0;
   el.textContent = count;
 }
-function openLightbox(src) {
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightboxImg');
-  img.src = src;
-  lightbox.style.display = 'flex';
+
+function getCheckedOptions(parentElement) {
+  const checkboxes = parentElement.querySelectorAll('input[type="checkbox"]:checked');
+  return Array.from(checkboxes).map(cb => cb.value);
 }
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
-function sendComment(){
-  const note=document.getElementById('commentBox').value.trim();
-  if(note){
-    const body=encodeURIComponent('Kid Menu Comment:%0A'+note);
-    window.location.href=`sms:2089540655&body=${body}`;
-  }else{
-    alert('Please add a comment before sending.');
+
+function sendOrder() {
+  let message = 'Hi Dad! Here's my order for today:%0A%0A';
+  let hasItems = false;
+  
+  // Breakfast items
+  const items = [
+    { id: 'Oatmeal', name: 'Cinnamon Apple Oatmeal' },
+    { id: 'Yogurt', name: 'Vanilla Greek Yogurt' },
+    { id: 'Chia', name: 'Chia Seed Pudding' },
+    { id: 'Eggs', name: 'Eggs', select: 'EggsStyle' },
+    { id: 'Omelet', name: 'Egg Omelet', checkboxGroup: true },
+    { id: 'Toast', name: 'Toast', selects: ['ToastBread', 'ToastTopping'] },
+    { id: 'Potatoes', name: 'Potatoes (Breakfast)' },
+    { id: 'Bacon', name: 'Bacon' },
+    { id: 'Sausage', name: 'Sausage' },
+    { id: 'Cottage', name: 'Cottage Cheese' },
+    { id: 'Cheerios', name: 'Honey Nut Cheerios', checkboxGroup: true },
+    
+    // Lunch items
+    { id: 'Rice', name: 'White Rice', checkboxGroup: true },
+    { id: 'Steak', name: 'Steak' },
+    { id: 'LunchPotatoes', name: 'Potatoes (Lunch)' },
+    { id: 'Vegetables', name: 'Vegetables', select: 'VegOptions' },
+    { id: 'Salad', name: 'Salad', checkboxGroup: true, select: 'SaladDressing' },
+    { id: 'Sandwich', name: 'Sandwich', checkboxGroup: true, select: 'SandwichBread' },
+    { id: 'Panda', name: 'Panda Express', checkboxGroup: true, select: 'PandaMain', text: ['OtherSide', 'PandaSauce'] },
+    { id: 'McDonalds', name: 'McDonalds', textarea: 'McDOrder' },
+    
+    // Snacks
+    { id: 'Goldfish', name: 'Goldfish Crackers' },
+    { id: 'Saltines', name: 'Saltines' },
+    { id: 'Waffles', name: 'Honey Stinger Mini Waffles' },
+    { id: 'FitCrunch', name: 'Mint Chocolate Chip FIT CRUNCH' },
+    { id: 'Hershey', name: 'Hershey Bar' },
+    { id: 'Fruit', name: 'Fruit', checkboxGroup: true },
+    
+    // Drinks
+    { id: 'ProteinShake', name: "Dad's Special Protein Shake" },
+    { id: 'Chai', name: 'Large Iced Chai (Starbucks)', textarea: 'ChaiNote' },
+    { id: 'Smoothie', name: 'Strawberry & Pineapple Smoothie' },
+    { id: 'Starbucks', name: 'Starbucks (Custom)', textarea: 'StarbucksOrder' }
+  ];
+  
+  items.forEach(item => {
+    const qtyEl = document.getElementById(item.id);
+    const count = parseInt(qtyEl.textContent);
+    
+    if (count > 0) {
+      hasItems = true;
+      message += `${item.name}: ${count}%0A`;
+      
+      // Add select options
+      if (item.select) {
+        const selectEl = document.getElementById(item.select);
+        if (selectEl) {
+          message += `  - ${selectEl.value}%0A`;
+        }
+      }
+      
+      // Add multiple selects
+      if (item.selects) {
+        item.selects.forEach(selectId => {
+          const selectEl = document.getElementById(selectId);
+          if (selectEl) {
+            message += `  - ${selectEl.value}%0A`;
+          }
+        });
+      }
+      
+      // Add checkbox options
+      if (item.checkboxGroup) {
+        const itemEl = qtyEl.closest('.item');
+        const checked = getCheckedOptions(itemEl);
+        if (checked.length > 0) {
+          message += `  - With: ${checked.join(', ')}%0A`;
+        }
+      }
+      
+      // Add text inputs
+      if (item.text) {
+        item.text.forEach(textId => {
+          const textEl = document.getElementById(textId);
+          if (textEl && textEl.value.trim()) {
+            message += `  - ${textEl.value.trim()}%0A`;
+          }
+        });
+      }
+      
+      // Add textarea
+      if (item.textarea) {
+        const textareaEl = document.getElementById(item.textarea);
+        if (textareaEl && textareaEl.value.trim()) {
+          message += `  - ${textareaEl.value.trim()}%0A`;
+        }
+      }
+      
+      message += '%0A';
+    }
+  });
+  
+  const note = document.getElementById('note').value.trim();
+  if (note) {
+    message += `SPECIAL NOTES:%0A${note}%0A`;
   }
+  
+  if (!hasItems) {
+    alert('Please add at least one item to your order!');
+    return;
+  }
+  
+  message += '%0ALove you Dad! 💛';
+  window.location.href = `sms:2089540655&body=${message}`;
+}
+
+function clearOrder() {
+  document.querySelectorAll('.qty-controls span[id]').forEach(span => span.textContent = '0');
+  document.querySelectorAll('textarea').forEach(txt => txt.value = '');
+  document.querySelectorAll('input[type=text]').forEach(inp => inp.value = '');
+  document.querySelectorAll('input[type=checkbox]').forEach(chk => chk.checked = false);
 }
 </script>
-
-<div id='comments' class='section'>
-  <h2>💬 Comments & Notes</h2>
-  <textarea id='commentBox' placeholder='Add a note or comment...'></textarea>
-  <button id='sendComment' onclick='sendComment()'>Send</button>
-</div>
-
-<footer style="text-align:center;padding:20px;color:#3b2e06;font-family:'Papyrus',cursive;font-size:1.1em;">Love, Dad 🤎✝️</footer>
-
 </body>
 </html>
