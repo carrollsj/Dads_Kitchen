@@ -373,7 +373,6 @@ footer {
       <button onclick="change('salad',1)">+</button>
     </div>
   </div>
-```html
   <div class="item">
     <span>Sandwich</span>
     <select id="sandwichBread"><option>White</option><option>Sourdough</option><option>Wheat</option></select>
@@ -577,7 +576,9 @@ document.getElementById('send').onclick = function() {
     {id:'chai', name:'Large Iced Chai (Starbucks)', textarea:'chaiNote'},
     {id:'smoothie', name:'Strawberry & Pineapple Smoothie'},
     {id:'starbucks', name:'Starbucks (Custom)', textarea:'starbucksOrder'}
-    items.forEach(function(item) {
+  ];
+  
+  items.forEach(function(item) {
     const el = document.getElementById(item.id);
     const qty = parseInt(el.textContent);
     
