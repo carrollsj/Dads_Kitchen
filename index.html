@@ -1,3 +1,10 @@
+# Complete Kid Menu - Enhanced Final Version
+
+Copy everything below from `<!DOCTYPE html>` to `</html>`
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +13,9 @@
 <title>Kid Menu Order - Aloha Edition</title>
 <style>
 * { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
   background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #74b9ff 100%);
@@ -102,6 +112,7 @@ button {
   transition: all 0.2s;
   font-weight: bold;
   padding: 0;
+  touch-action: manipulation;
 }
 button:hover {
   background: #d4983d;
@@ -523,7 +534,6 @@ footer {
 function change(id, delta) {
   const el = document.getElementById(id);
   if (!el) return;
-  // Parse safely (handles NaN, empty text, or stray spaces)
   let count = parseInt(el.textContent.trim() || "0", 10);
   count = isNaN(count) ? 0 : count + delta;
   if (count < 0) count = 0;
@@ -643,9 +653,10 @@ document.getElementById('send').onclick = function() {
   }
   
   msg += '%0ALove you Dad! 💛';
-  window.location.href = 'sms:2089540655&body=' + msg;
+  
+  alert("Opening Messages app with your order!");
+  window.location.href = 'sms:2089540655?&body=' + msg;
 };
 </script>
 
 </body>
-</html>
