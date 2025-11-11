@@ -90,7 +90,7 @@ h2 {
   align-items: center;
   gap: 8px;
 }
-.qty-btn {
+button {
   font-size: 1.4em;
   border: 2px solid #d4983d;
   background: #fff;
@@ -101,21 +101,17 @@ h2 {
   cursor: pointer;
   transition: all 0.2s;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
-  line-height: 1;
 }
-.qty-btn:hover {
+button:hover {
   background: #d4983d;
   color: #fff;
   transform: scale(1.1);
 }
-.qty-btn:active {
+button:active {
   transform: scale(0.95);
 }
-.qty-display {
+.qty {
   min-width: 30px;
   text-align: center;
   font-weight: bold;
@@ -211,186 +207,6 @@ footer {
 </head>
 <body>
 
-<script>
-var quantities = {};
-
-function changeQty(id, delta) {
-  if (!quantities[id]) quantities[id] = 0;
-  quantities[id] += delta;
-  if (quantities[id] < 0) quantities[id] = 0;
-  document.getElementById(id).textContent = quantities[id];
-}
-
-function clearAll() {
-  quantities = {};
-  var displays = document.querySelectorAll('.qty-display');
-  for (var i = 0; i < displays.length; i++) {
-    displays[i].textContent = '0';
-  }
-  var textareas = document.querySelectorAll('textarea');
-  for (var i = 0; i < textareas.length; i++) {
-    textareas[i].value = '';
-  }
-  var texts = document.querySelectorAll('input[type="text"]');
-  for (var i = 0; i < texts.length; i++) {
-    texts[i].value = '';
-  }
-  var checks = document.querySelectorAll('input[type="checkbox"]');
-  for (var i = 0; i < checks.length; i++) {
-    checks[i].checked = false;
-  }
-}
-
-function sendMsg() {
-  var msg = 'Hi Dad! Here's my order for today:%0A%0A';
-  var hasItems = false;
-  
-  if (quantities.Oatmeal > 0) { msg += 'Cinnamon Apple Oatmeal: ' + quantities.Oatmeal + '%0A'; hasItems = true; }
-  if (quantities.Yogurt > 0) { msg += 'Vanilla Greek Yogurt: ' + quantities.Yogurt + '%0A'; hasItems = true; }
-  if (quantities.Chia > 0) { msg += 'Chia Seed Pudding: ' + quantities.Chia + '%0A'; hasItems = true; }
-  
-  if (quantities.Eggs > 0) {
-    msg += 'Eggs: ' + quantities.Eggs + '%0A';
-    msg += '  - ' + document.getElementById('EggsStyle').value + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Omelet > 0) {
-    msg += 'Egg Omelet: ' + quantities.Omelet + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#breakfast .item:nth-child(5) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Toast > 0) {
-    msg += 'Toast: ' + quantities.Toast + '%0A';
-    msg += '  - ' + document.getElementById('ToastBread').value + '%0A';
-    msg += '  - ' + document.getElementById('ToastTopping').value + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Potatoes > 0) { msg += 'Potatoes (Breakfast): ' + quantities.Potatoes + '%0A'; hasItems = true; }
-  if (quantities.Bacon > 0) { msg += 'Bacon: ' + quantities.Bacon + '%0A'; hasItems = true; }
-  if (quantities.Sausage > 0) { msg += 'Sausage: ' + quantities.Sausage + '%0A'; hasItems = true; }
-  if (quantities.Cottage > 0) { msg += 'Cottage Cheese: ' + quantities.Cottage + '%0A'; hasItems = true; }
-  
-  if (quantities.Cheerios > 0) {
-    msg += 'Honey Nut Cheerios: ' + quantities.Cheerios + '%0A';
-    if (document.querySelector('#breakfast .item:nth-child(11) input[type="checkbox"]').checked) {
-      msg += '  - Add Marshmallows%0A';
-    }
-    hasItems = true;
-  }
-  
-  if (quantities.Rice > 0) {
-    msg += 'White Rice: ' + quantities.Rice + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#lunch .item:nth-child(1) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Steak > 0) { msg += 'Steak: ' + quantities.Steak + '%0A'; hasItems = true; }
-  if (quantities.LunchPotatoes > 0) { msg += 'Potatoes (Lunch): ' + quantities.LunchPotatoes + '%0A'; hasItems = true; }
-  
-  if (quantities.Vegetables > 0) {
-    msg += 'Vegetables: ' + quantities.Vegetables + '%0A';
-    msg += '  - ' + document.getElementById('VegOptions').value + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Salad > 0) {
-    msg += 'Salad: ' + quantities.Salad + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#lunch .item:nth-child(5) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
-    msg += '  - ' + document.getElementById('SaladDressing').value + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Sandwich > 0) {
-    msg += 'Sandwich: ' + quantities.Sandwich + '%0A';
-    msg += '  - ' + document.getElementById('SandwichBread').value + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#lunch .item:nth-child(6) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Panda > 0) {
-    msg += 'Panda Express: ' + quantities.Panda + '%0A';
-    msg += '  - ' + document.getElementById('PandaMain').value + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#lunch .item:nth-child(7) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - Entrees: ' + opts.join(', ') + '%0A';
-    var other = document.getElementById('OtherSide').value;
-    if (other) msg += '  - ' + other + '%0A';
-    var sauce = document.getElementById('PandaSauce').value;
-    if (sauce) msg += '  - Sauces: ' + sauce + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.McDonalds > 0) {
-    msg += 'McDonalds: ' + quantities.McDonalds + '%0A';
-    var order = document.getElementById('McDOrder').value;
-    if (order) msg += '  - ' + order + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Goldfish > 0) { msg += 'Goldfish Crackers: ' + quantities.Goldfish + '%0A'; hasItems = true; }
-  if (quantities.Saltines > 0) { msg += 'Saltines: ' + quantities.Saltines + '%0A'; hasItems = true; }
-  if (quantities.Waffles > 0) { msg += 'Honey Stinger Mini Waffles: ' + quantities.Waffles + '%0A'; hasItems = true; }
-  if (quantities.FitCrunch > 0) { msg += 'Mint Chocolate Chip FIT CRUNCH: ' + quantities.FitCrunch + '%0A'; hasItems = true; }
-  if (quantities.Hershey > 0) { msg += 'Hershey Bar: ' + quantities.Hershey + '%0A'; hasItems = true; }
-  
-  if (quantities.Fruit > 0) {
-    msg += 'Fruit: ' + quantities.Fruit + '%0A';
-    var opts = [];
-    var checks = document.querySelectorAll('#snacks .item:nth-child(6) input[type="checkbox"]:checked');
-    for (var i = 0; i < checks.length; i++) opts.push(checks[i].value);
-    if (opts.length > 0) msg += '  - Types: ' + opts.join(', ') + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.ProteinShake > 0) { msg += "Dad's Special Protein Shake: " + quantities.ProteinShake + '%0A'; hasItems = true; }
-  
-  if (quantities.Chai > 0) {
-    msg += 'Large Iced Chai (Starbucks): ' + quantities.Chai + '%0A';
-    var note = document.getElementById('ChaiNote').value;
-    if (note) msg += '  - ' + note + '%0A';
-    hasItems = true;
-  }
-  
-  if (quantities.Smoothie > 0) { msg += 'Strawberry & Pineapple Smoothie: ' + quantities.Smoothie + '%0A'; hasItems = true; }
-  
-  if (quantities.Starbucks > 0) {
-    msg += 'Starbucks (Custom): ' + quantities.Starbucks + '%0A';
-    var order = document.getElementById('StarbucksOrder').value;
-    if (order) msg += '  - ' + order + '%0A';
-    hasItems = true;
-  }
-  
-  var note = document.getElementById('note').value.trim();
-  if (note) {
-    msg += '%0ASPECIAL NOTES:%0A' + note + '%0A';
-  }
-  
-  if (!hasItems) {
-    alert('Please add at least one item to your order!');
-    return;
-  }
-  
-  msg += '%0ALove you Dad! 💛';
-  window.location.href = 'sms:2089540655&body=' + msg;
-}
-</script>
-
 <header>"Whatever you do, do it from the heart, as something done for the Lord." — Colossians 3:23</header>
 <nav>
   <a href="#breakfast">Breakfast</a> |
@@ -404,9 +220,200 @@ function sendMsg() {
   <div class="item">
     <span><img src="images/Oatmeal.png" class="item-icon" alt="" onerror="this.style.display='none'">Cinnamon Apple Oatmeal</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('McDonalds',-1)">−</button>
-      <span class="qty-display" id="McDonalds">0</span>
-      <button class="qty-btn" onclick="changeQty('McDonalds',1)">+</button>
+      <button onclick="change('oatmeal',-1)">−</button>
+      <span class="qty" id="oatmeal">0</span>
+      <button onclick="change('oatmeal',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Vanilla Greek Yogurt</span>
+    <div class="qty-controls">
+      <button onclick="change('yogurt',-1)">−</button>
+      <span class="qty" id="yogurt">0</span>
+      <button onclick="change('yogurt',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Chia Seed Pudding</span>
+    <div class="qty-controls">
+      <button onclick="change('chia',-1)">−</button>
+      <span class="qty" id="chia">0</span>
+      <button onclick="change('chia',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Eggs.png" class="item-icon" alt="" onerror="this.style.display='none'">Eggs</span>
+    <select id="eggsStyle"><option>Scrambled</option><option>Over Easy</option></select>
+    <div class="qty-controls">
+      <button onclick="change('eggs',-1)">−</button>
+      <span class="qty" id="eggs">0</span>
+      <button onclick="change('eggs',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Egg Omelet</span>
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Peppers">Peppers</label>
+      <label><input type="checkbox" value="Ham">Ham</label>
+      <label><input type="checkbox" value="Turkey Sausage">Turkey Sausage</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('omelet',-1)">−</button>
+      <span class="qty" id="omelet">0</span>
+      <button onclick="change('omelet',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Toast</span>
+    <select id="toastBread"><option>White</option><option>Nine Grain</option><option>Sourdough</option></select>
+    <select id="toastTopping"><option>Butter</option><option>Avocado</option><option>Honey</option><option>Strawberry Jam</option></select>
+    <div class="qty-controls">
+      <button onclick="change('toast',-1)">−</button>
+      <span class="qty" id="toast">0</span>
+      <button onclick="change('toast',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Potatoes</span>
+    <div class="qty-controls">
+      <button onclick="change('potatoes',-1)">−</button>
+      <span class="qty" id="potatoes">0</span>
+      <button onclick="change('potatoes',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Bacon</span>
+    <div class="qty-controls">
+      <button onclick="change('bacon',-1)">−</button>
+      <span class="qty" id="bacon">0</span>
+      <button onclick="change('bacon',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Sausage</span>
+    <div class="qty-controls">
+      <button onclick="change('sausage',-1)">−</button>
+      <span class="qty" id="sausage">0</span>
+      <button onclick="change('sausage',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Cottage-Cheese.png" class="item-icon" alt="" onerror="this.style.display='none'">Cottage Cheese</span>
+    <div class="qty-controls">
+      <button onclick="change('cottage',-1)">−</button>
+      <span class="qty" id="cottage">0</span>
+      <button onclick="change('cottage',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Honey-Nut-Cheerios.png" class="item-icon" alt="" onerror="this.style.display='none'">Honey Nut Cheerios</span>
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="cheeriosMarshmallows" value="Marshmallows">Add Marshmallows</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('cheerios',-1)">−</button>
+      <span class="qty" id="cheerios">0</span>
+      <button onclick="change('cheerios',1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="lunch" class="section">
+  <h2>🥪 Lunch Roundup</h2>
+  <div class="item">
+    <span><img src="images/White-Rice.png" class="item-icon" alt="" onerror="this.style.display='none'">White Rice</span>
+    <div class="checkbox-group" id="riceOptions">
+      <label><input type="checkbox" value="Black Beans">Black Beans</label>
+      <label><input type="checkbox" value="Tuna">Tuna</label>
+      <label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('rice',-1)">−</button>
+      <span class="qty" id="rice">0</span>
+      <button onclick="change('rice',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Steak</span>
+    <div class="qty-controls">
+      <button onclick="change('steak',-1)">−</button>
+      <span class="qty" id="steak">0</span>
+      <button onclick="change('steak',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Potatoes</span>
+    <div class="qty-controls">
+      <button onclick="change('lunchpotatoes',-1)">−</button>
+      <span class="qty" id="lunchpotatoes">0</span>
+      <button onclick="change('lunchpotatoes',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Vegetables</span>
+    <select id="vegOptions"><option>Corn</option><option>Green Beans</option></select>
+    <div class="qty-controls">
+      <button onclick="change('vegetables',-1)">−</button>
+      <span class="qty" id="vegetables">0</span>
+      <button onclick="change('vegetables',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Salad</span>
+    <div class="checkbox-group" id="saladOptions">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Chicken">Chicken</label>
+      <label><input type="checkbox" value="Croutons">Croutons</label>
+    </div>
+    <select id="saladDressing"><option>Ranch</option><option>Caesar</option></select>
+    <div class="qty-controls">
+      <button onclick="change('salad',-1)">−</button>
+      <span class="qty" id="salad">0</span>
+      <button onclick="change('salad',1)">+</button>
+    </div>
+  </div>
+```html
+  <div class="item">
+    <span>Sandwich</span>
+    <select id="sandwichBread"><option>White</option><option>Sourdough</option><option>Wheat</option></select>
+    <div class="checkbox-group" id="sandwichOptions">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Lettuce">Lettuce</label>
+      <label><input type="checkbox" value="Tomatoes">Tomatoes</label>
+      <label><input type="checkbox" value="Ham">Ham</label>
+      <label><input type="checkbox" value="Turkey">Turkey</label>
+      <label><input type="checkbox" value="Pepperoni">Pepperoni</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('sandwich',-1)">−</button>
+      <span class="qty" id="sandwich">0</span>
+      <button onclick="change('sandwich',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Panda Express</span>
+    <select id="pandaMain"><option>Rice</option><option>Chow Mein</option></select>
+    <div class="checkbox-group" id="pandaOptions">
+      <label><input type="checkbox" value="Orange Chicken">Orange Chicken</label>
+      <label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label>
+      <label><input type="checkbox" value="Honey Walnut Shrimp">Honey Walnut Shrimp</label>
+    </div>
+    <input type="text" id="pandaOther" placeholder="Other side (if different)">
+    <input type="text" id="pandaSauce" placeholder="Sauces">
+    <div class="qty-controls">
+      <button onclick="change('panda',-1)">−</button>
+      <span class="qty" id="panda">0</span>
+      <button onclick="change('panda',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>McDonalds</span>
+    <textarea id="mcdOrder" placeholder="Enter order (include drink/fries if wanted)..."></textarea>
+    <div class="qty-controls">
+      <button onclick="change('mcdonalds',-1)">−</button>
+      <span class="qty" id="mcdonalds">0</span>
+      <button onclick="change('mcdonalds',1)">+</button>
     </div>
   </div>
 </div>
@@ -416,55 +423,55 @@ function sendMsg() {
   <div class="item">
     <span><img src="images/Gold-Fish.png" class="item-icon" alt="" onerror="this.style.display='none'">Goldfish Crackers</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Goldfish',-1)">−</button>
-      <span class="qty-display" id="Goldfish">0</span>
-      <button class="qty-btn" onclick="changeQty('Goldfish',1)">+</button>
+      <button onclick="change('goldfish',-1)">−</button>
+      <span class="qty" id="goldfish">0</span>
+      <button onclick="change('goldfish',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span>Saltines</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Saltines',-1)">−</button>
-      <span class="qty-display" id="Saltines">0</span>
-      <button class="qty-btn" onclick="changeQty('Saltines',1)">+</button>
+      <button onclick="change('saltines',-1)">−</button>
+      <span class="qty" id="saltines">0</span>
+      <button onclick="change('saltines',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span><img src="images/Honey-Stinger-Waffles.png" class="item-icon" alt="" onerror="this.style.display='none'">Honey Stinger Mini Waffles</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Waffles',-1)">−</button>
-      <span class="qty-display" id="Waffles">0</span>
-      <button class="qty-btn" onclick="changeQty('Waffles',1)">+</button>
+      <button onclick="change('waffles',-1)">−</button>
+      <span class="qty" id="waffles">0</span>
+      <button onclick="change('waffles',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span><img src="images/Fit-Crunch-Mint-Chocolate-Chip.png" class="item-icon" alt="" onerror="this.style.display='none'">Mint Chocolate Chip FIT CRUNCH</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('FitCrunch',-1)">−</button>
-      <span class="qty-display" id="FitCrunch">0</span>
-      <button class="qty-btn" onclick="changeQty('FitCrunch',1)">+</button>
+      <button onclick="change('fitcrunch',-1)">−</button>
+      <span class="qty" id="fitcrunch">0</span>
+      <button onclick="change('fitcrunch',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span><img src="images/Hershey-Bar.png" class="item-icon" alt="" onerror="this.style.display='none'">Hershey Bar</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Hershey',-1)">−</button>
-      <span class="qty-display" id="Hershey">0</span>
-      <button class="qty-btn" onclick="changeQty('Hershey',1)">+</button>
+      <button onclick="change('hershey',-1)">−</button>
+      <span class="qty" id="hershey">0</span>
+      <button onclick="change('hershey',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span>Fruit</span>
-    <div class="checkbox-group">
-      <label><input type="checkbox" value="Red Grapes"> Red Grapes</label>
-      <label><input type="checkbox" value="Strawberries"> Strawberries</label>
-      <label><input type="checkbox" value="Watermelon"> Watermelon</label>
-      <label><input type="checkbox" value="Sliced Apple Honey Crisp"> Sliced Apple Honey Crisp</label>
+    <div class="checkbox-group" id="fruitOptions">
+      <label><input type="checkbox" value="Red Grapes">Red Grapes</label>
+      <label><input type="checkbox" value="Strawberries">Strawberries</label>
+      <label><input type="checkbox" value="Watermelon">Watermelon</label>
+      <label><input type="checkbox" value="Sliced Apple Honey Crisp">Sliced Apple Honey Crisp</label>
     </div>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Fruit',-1)">−</button>
-      <span class="qty-display" id="Fruit">0</span>
-      <button class="qty-btn" onclick="changeQty('Fruit',1)">+</button>
+      <button onclick="change('fruit',-1)">−</button>
+      <span class="qty" id="fruit">0</span>
+      <button onclick="change('fruit',1)">+</button>
     </div>
   </div>
 </div>
@@ -474,44 +481,168 @@ function sendMsg() {
   <div class="item">
     <span><img src="images/Premier-Protien-Vanilla.png" class="item-icon" alt="" onerror="this.style.display='none'">Dad's Special Protein Shake</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('ProteinShake',-1)">−</button>
-      <span class="qty-display" id="ProteinShake">0</span>
-      <button class="qty-btn" onclick="changeQty('ProteinShake',1)">+</button>
+      <button onclick="change('proteinshake',-1)">−</button>
+      <span class="qty" id="proteinshake">0</span>
+      <button onclick="change('proteinshake',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span>Large Iced Chai (Starbucks)</span>
-    <textarea id="ChaiNote" placeholder="Oat milk, brown sugar cold foam, 2 pumps vanilla"></textarea>
+    <textarea id="chaiNote" placeholder="Oat milk, brown sugar cold foam, 2 pumps vanilla"></textarea>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Chai',-1)">−</button>
-      <span class="qty-display" id="Chai">0</span>
-      <button class="qty-btn" onclick="changeQty('Chai',1)">+</button>
+      <button onclick="change('chai',-1)">−</button>
+      <span class="qty" id="chai">0</span>
+      <button onclick="change('chai',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span>Strawberry & Pineapple Smoothie</span>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Smoothie',-1)">−</button>
-      <span class="qty-display" id="Smoothie">0</span>
-      <button class="qty-btn" onclick="changeQty('Smoothie',1)">+</button>
+      <button onclick="change('smoothie',-1)">−</button>
+      <span class="qty" id="smoothie">0</span>
+      <button onclick="change('smoothie',1)">+</button>
     </div>
   </div>
   <div class="item">
     <span>Starbucks (Custom)</span>
-    <textarea id="StarbucksOrder" placeholder="Enter Starbucks order (include size)..."></textarea>
+    <textarea id="starbucksOrder" placeholder="Enter Starbucks order (include size)..."></textarea>
     <div class="qty-controls">
-      <button class="qty-btn" onclick="changeQty('Starbucks',-1)">−</button>
-      <span class="qty-display" id="Starbucks">0</span>
-      <button class="qty-btn" onclick="changeQty('Starbucks',1)">+</button>
+      <button onclick="change('starbucks',-1)">−</button>
+      <span class="qty" id="starbucks">0</span>
+      <button onclick="change('starbucks',1)">+</button>
     </div>
   </div>
 </div>
 
 <textarea id="note" placeholder="Add note for Dad (extra syrup, special request, etc.)"></textarea>
-<button id="send" onclick="sendMsg()">📱 Send Order to Dad</button>
-<button id="clear" onclick="clearAll()">🔄 Clear Order</button>
+<button id="send">📱 Send Order to Dad</button>
+<button id="clear">🔄 Clear Order</button>
 
 <footer>Love, Dad 🤎✝️</footer>
+
+<script>
+function change(id, delta) {
+  const el = document.getElementById(id);
+  let count = parseInt(el.textContent);
+  count += delta;
+  if (count < 0) count = 0;
+  el.textContent = count;
+}
+
+function getChecked(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return [];
+  const checked = container.querySelectorAll('input[type="checkbox"]:checked');
+  return Array.from(checked).map(c => c.value);
+}
+
+document.getElementById('clear').onclick = function() {
+  document.querySelectorAll('.qty').forEach(el => el.textContent = '0');
+  document.querySelectorAll('textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="text"]').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+};
+
+document.getElementById('send').onclick = function() {
+  let msg = 'Hi Dad! Here's my order for today:%0A%0A';
+  let hasItems = false;
+  
+  const items = [
+    {id:'oatmeal', name:'Cinnamon Apple Oatmeal'},
+    {id:'yogurt', name:'Vanilla Greek Yogurt'},
+    {id:'chia', name:'Chia Seed Pudding'},
+    {id:'eggs', name:'Eggs', select:'eggsStyle'},
+    {id:'omelet', name:'Egg Omelet', checks:'#breakfast .item:nth-child(5) input[type="checkbox"]:checked'},
+    {id:'toast', name:'Toast', selects:['toastBread','toastTopping']},
+    {id:'potatoes', name:'Potatoes (Breakfast)'},
+    {id:'bacon', name:'Bacon'},
+    {id:'sausage', name:'Sausage'},
+    {id:'cottage', name:'Cottage Cheese'},
+    {id:'cheerios', name:'Honey Nut Cheerios', checkbox:'cheeriosMarshmallows'},
+    {id:'rice', name:'White Rice', checkGroup:'riceOptions'},
+    {id:'steak', name:'Steak'},
+    {id:'lunchpotatoes', name:'Potatoes (Lunch)'},
+    {id:'vegetables', name:'Vegetables', select:'vegOptions'},
+    {id:'salad', name:'Salad', checkGroup:'saladOptions', select:'saladDressing'},
+    {id:'sandwich', name:'Sandwich', checkGroup:'sandwichOptions', select:'sandwichBread'},
+    {id:'panda', name:'Panda Express', checkGroup:'pandaOptions', select:'pandaMain', texts:['pandaOther','pandaSauce']},
+    {id:'mcdonalds', name:'McDonalds', textarea:'mcdOrder'},
+    {id:'goldfish', name:'Goldfish Crackers'},
+    {id:'saltines', name:'Saltines'},
+    {id:'waffles', name:'Honey Stinger Mini Waffles'},
+    {id:'fitcrunch', name:'Mint Chocolate Chip FIT CRUNCH'},
+    {id:'hershey', name:'Hershey Bar'},
+    {id:'fruit', name:'Fruit', checkGroup:'fruitOptions'},
+    {id:'proteinshake', name:"Dad's Special Protein Shake"},
+    {id:'chai', name:'Large Iced Chai (Starbucks)', textarea:'chaiNote'},
+    {id:'smoothie', name:'Strawberry & Pineapple Smoothie'},
+    {id:'starbucks', name:'Starbucks (Custom)', textarea:'starbucksOrder'}
+    items.forEach(function(item) {
+    const el = document.getElementById(item.id);
+    const qty = parseInt(el.textContent);
+    
+    if (qty > 0) {
+      hasItems = true;
+      msg += item.name + ': ' + qty + '%0A';
+      
+      if (item.select) {
+        const sel = document.getElementById(item.select);
+        if (sel) msg += '  - ' + sel.value + '%0A';
+      }
+      
+      if (item.selects) {
+        item.selects.forEach(function(selectId) {
+          const sel = document.getElementById(selectId);
+          if (sel) msg += '  - ' + sel.value + '%0A';
+        });
+      }
+      
+      if (item.checkGroup) {
+        const opts = getChecked(item.checkGroup);
+        if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
+      }
+      
+      if (item.checks) {
+        const checked = document.querySelectorAll(item.checks);
+        const opts = Array.from(checked).map(function(c) { return c.value; });
+        if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
+      }
+      
+      if (item.checkbox) {
+        const chk = document.getElementById(item.checkbox);
+        if (chk && chk.checked) msg += '  - Add Marshmallows%0A';
+      }
+      
+      if (item.texts) {
+        item.texts.forEach(function(textId) {
+          const txt = document.getElementById(textId);
+          if (txt && txt.value.trim()) msg += '  - ' + txt.value.trim() + '%0A';
+        });
+      }
+      
+      if (item.textarea) {
+        const txt = document.getElementById(item.textarea);
+        if (txt && txt.value.trim()) msg += '  - ' + txt.value.trim() + '%0A';
+      }
+      
+      msg += '%0A';
+    }
+  });
+  
+  const note = document.getElementById('note').value.trim();
+  if (note) {
+    msg += 'SPECIAL NOTES:%0A' + note + '%0A';
+  }
+  
+  if (!hasItems) {
+    alert('Please add at least one item to your order!');
+    return;
+  }
+  
+  msg += '%0ALove you Dad! 💛';
+  window.location.href = 'sms:2089540655&body=' + msg;
+};
+</script>
 
 </body>
 </html>
