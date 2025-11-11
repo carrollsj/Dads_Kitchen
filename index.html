@@ -215,8 +215,303 @@ footer {
   <a href="#drinks">Drinks</a>
 </nav>
 
-<!-- all your menu sections remain unchanged -->
-<!-- ... (same HTML content as you provided above for breakfast, lunch, snacks, drinks, etc.) ... -->
+<div id="breakfast" class="section">
+  <h2>🥞 Breakfast Blessings</h2>
+  <div class="item">
+    <span><img src="images/Oatmeal.png" class="item-icon" alt="" onerror="this.style.display='none'">Cinnamon Apple Oatmeal</span>
+    <div class="qty-controls">
+      <button onclick="change('oatmeal',-1)">−</button>
+      <span class="qty" id="oatmeal">0</span>
+      <button onclick="change('oatmeal',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Vanilla Greek Yogurt</span>
+    <div class="qty-controls">
+      <button onclick="change('yogurt',-1)">−</button>
+      <span class="qty" id="yogurt">0</span>
+      <button onclick="change('yogurt',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Chia Seed Pudding</span>
+    <div class="qty-controls">
+      <button onclick="change('chia',-1)">−</button>
+      <span class="qty" id="chia">0</span>
+      <button onclick="change('chia',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Eggs.png" class="item-icon" alt="" onerror="this.style.display='none'">Eggs</span>
+    <select id="eggsStyle"><option>Scrambled</option><option>Over Easy</option></select>
+    <div class="qty-controls">
+      <button onclick="change('eggs',-1)">−</button>
+      <span class="qty" id="eggs">0</span>
+      <button onclick="change('eggs',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Egg Omelet</span>
+    <div class="checkbox-group">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Peppers">Peppers</label>
+      <label><input type="checkbox" value="Ham">Ham</label>
+      <label><input type="checkbox" value="Turkey Sausage">Turkey Sausage</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('omelet',-1)">−</button>
+      <span class="qty" id="omelet">0</span>
+      <button onclick="change('omelet',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Toast</span>
+    <select id="toastBread"><option>White</option><option>Nine Grain</option><option>Sourdough</option></select>
+    <select id="toastTopping"><option>Butter</option><option>Avocado</option><option>Honey</option><option>Strawberry Jam</option></select>
+    <div class="qty-controls">
+      <button onclick="change('toast',-1)">−</button>
+      <span class="qty" id="toast">0</span>
+      <button onclick="change('toast',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Potatoes</span>
+    <div class="qty-controls">
+      <button onclick="change('potatoes',-1)">−</button>
+      <span class="qty" id="potatoes">0</span>
+      <button onclick="change('potatoes',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Bacon</span>
+    <div class="qty-controls">
+      <button onclick="change('bacon',-1)">−</button>
+      <span class="qty" id="bacon">0</span>
+      <button onclick="change('bacon',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Sausage</span>
+    <div class="qty-controls">
+      <button onclick="change('sausage',-1)">−</button>
+      <span class="qty" id="sausage">0</span>
+      <button onclick="change('sausage',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Cottage-Cheese.png" class="item-icon" alt="" onerror="this.style.display='none'">Cottage Cheese</span>
+    <div class="qty-controls">
+      <button onclick="change('cottage',-1)">−</button>
+      <span class="qty" id="cottage">0</span>
+      <button onclick="change('cottage',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Honey-Nut-Cheerios.png" class="item-icon" alt="" onerror="this.style.display='none'">Honey Nut Cheerios</span>
+    <div class="checkbox-group">
+      <label><input type="checkbox" id="cheeriosMarshmallows" value="Marshmallows">Add Marshmallows</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('cheerios',-1)">−</button>
+      <span class="qty" id="cheerios">0</span>
+      <button onclick="change('cheerios',1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="lunch" class="section">
+  <h2>🥪 Lunch Roundup</h2>
+  <div class="item">
+    <span><img src="images/White-Rice.png" class="item-icon" alt="" onerror="this.style.display='none'">White Rice</span>
+    <div class="checkbox-group" id="riceOptions">
+      <label><input type="checkbox" value="Black Beans">Black Beans</label>
+      <label><input type="checkbox" value="Tuna">Tuna</label>
+      <label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('rice',-1)">−</button>
+      <span class="qty" id="rice">0</span>
+      <button onclick="change('rice',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Steak</span>
+    <div class="qty-controls">
+      <button onclick="change('steak',-1)">−</button>
+      <span class="qty" id="steak">0</span>
+      <button onclick="change('steak',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Potatoes</span>
+    <div class="qty-controls">
+      <button onclick="change('lunchpotatoes',-1)">−</button>
+      <span class="qty" id="lunchpotatoes">0</span>
+      <button onclick="change('lunchpotatoes',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Vegetables</span>
+    <select id="vegOptions"><option>Corn</option><option>Green Beans</option></select>
+    <div class="qty-controls">
+      <button onclick="change('vegetables',-1)">−</button>
+      <span class="qty" id="vegetables">0</span>
+      <button onclick="change('vegetables',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Salad</span>
+    <div class="checkbox-group" id="saladOptions">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Chicken">Chicken</label>
+      <label><input type="checkbox" value="Croutons">Croutons</label>
+    </div>
+    <select id="saladDressing"><option>Ranch</option><option>Caesar</option></select>
+    <div class="qty-controls">
+      <button onclick="change('salad',-1)">−</button>
+      <span class="qty" id="salad">0</span>
+      <button onclick="change('salad',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Sandwich</span>
+    <select id="sandwichBread"><option>White</option><option>Sourdough</option><option>Wheat</option></select>
+    <div class="checkbox-group" id="sandwichOptions">
+      <label><input type="checkbox" value="Cheese">Cheese</label>
+      <label><input type="checkbox" value="Lettuce">Lettuce</label>
+      <label><input type="checkbox" value="Tomatoes">Tomatoes</label>
+      <label><input type="checkbox" value="Ham">Ham</label>
+      <label><input type="checkbox" value="Turkey">Turkey</label>
+      <label><input type="checkbox" value="Pepperoni">Pepperoni</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('sandwich',-1)">−</button>
+      <span class="qty" id="sandwich">0</span>
+      <button onclick="change('sandwich',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Panda Express</span>
+    <select id="pandaMain"><option>Rice</option><option>Chow Mein</option></select>
+    <div class="checkbox-group" id="pandaOptions">
+      <label><input type="checkbox" value="Orange Chicken">Orange Chicken</label>
+      <label><input type="checkbox" value="Teriyaki Chicken">Teriyaki Chicken</label>
+      <label><input type="checkbox" value="Honey Walnut Shrimp">Honey Walnut Shrimp</label>
+    </div>
+    <input type="text" id="pandaOther" placeholder="Other side (if different)">
+    <input type="text" id="pandaSauce" placeholder="Sauces">
+    <div class="qty-controls">
+      <button onclick="change('panda',-1)">−</button>
+      <span class="qty" id="panda">0</span>
+      <button onclick="change('panda',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>McDonalds</span>
+    <textarea id="mcdOrder" placeholder="Enter order (include drink/fries if wanted)..."></textarea>
+    <div class="qty-controls">
+      <button onclick="change('mcdonalds',-1)">−</button>
+      <span class="qty" id="mcdonalds">0</span>
+      <button onclick="change('mcdonalds',1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="snacks" class="section">
+  <h2>🍎 Snack Shack</h2>
+  <div class="item">
+    <span><img src="images/Gold-Fish.png" class="item-icon" alt="" onerror="this.style.display='none'">Goldfish Crackers</span>
+    <div class="qty-controls">
+      <button onclick="change('goldfish',-1)">−</button>
+      <span class="qty" id="goldfish">0</span>
+      <button onclick="change('goldfish',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Saltines</span>
+    <div class="qty-controls">
+      <button onclick="change('saltines',-1)">−</button>
+      <span class="qty" id="saltines">0</span>
+      <button onclick="change('saltines',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Honey-Stinger-Waffles.png" class="item-icon" alt="" onerror="this.style.display='none'">Honey Stinger Mini Waffles</span>
+    <div class="qty-controls">
+      <button onclick="change('waffles',-1)">−</button>
+      <span class="qty" id="waffles">0</span>
+      <button onclick="change('waffles',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Fit-Crunch-Mint-Chocolate-Chip.png" class="item-icon" alt="" onerror="this.style.display='none'">Mint Chocolate Chip FIT CRUNCH</span>
+    <div class="qty-controls">
+      <button onclick="change('fitcrunch',-1)">−</button>
+      <span class="qty" id="fitcrunch">0</span>
+      <button onclick="change('fitcrunch',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span><img src="images/Hershey-Bar.png" class="item-icon" alt="" onerror="this.style.display='none'">Hershey Bar</span>
+    <div class="qty-controls">
+      <button onclick="change('hershey',-1)">−</button>
+      <span class="qty" id="hershey">0</span>
+      <button onclick="change('hershey',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Fruit</span>
+    <div class="checkbox-group" id="fruitOptions">
+      <label><input type="checkbox" value="Red Grapes">Red Grapes</label>
+      <label><input type="checkbox" value="Strawberries">Strawberries</label>
+      <label><input type="checkbox" value="Watermelon">Watermelon</label>
+      <label><input type="checkbox" value="Sliced Apple Honey Crisp">Sliced Apple Honey Crisp</label>
+    </div>
+    <div class="qty-controls">
+      <button onclick="change('fruit',-1)">−</button>
+      <span class="qty" id="fruit">0</span>
+      <button onclick="change('fruit',1)">+</button>
+    </div>
+  </div>
+</div>
+
+<div id="drinks" class="section">
+  <h2>🥤 Drinks</h2>
+  <div class="item">
+    <span><img src="images/Premier-Protien-Vanilla.png" class="item-icon" alt="" onerror="this.style.display='none'">Dad's Special Protein Shake</span>
+    <div class="qty-controls">
+      <button onclick="change('proteinshake',-1)">−</button>
+      <span class="qty" id="proteinshake">0</span>
+      <button onclick="change('proteinshake',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Large Iced Chai (Starbucks)</span>
+    <textarea id="chaiNote" placeholder="Oat milk, brown sugar cold foam, 2 pumps vanilla"></textarea>
+    <div class="qty-controls">
+      <button onclick="change('chai',-1)">−</button>
+      <span class="qty" id="chai">0</span>
+      <button onclick="change('chai',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Strawberry & Pineapple Smoothie</span>
+    <div class="qty-controls">
+      <button onclick="change('smoothie',-1)">−</button>
+      <span class="qty" id="smoothie">0</span>
+      <button onclick="change('smoothie',1)">+</button>
+    </div>
+  </div>
+  <div class="item">
+    <span>Starbucks (Custom)</span>
+    <textarea id="starbucksOrder" placeholder="Enter Starbucks order (include size)..."></textarea>
+    <div class="qty-controls">
+      <button onclick="change('starbucks',-1)">−</button>
+      <span class="qty" id="starbucks">0</span>
+      <button onclick="change('starbucks',1)">+</button>
+    </div>
+  </div>
+</div>
 
 <textarea id="note" placeholder="Add note for Dad (extra syrup, special request, etc.)"></textarea>
 <button id="send">📱 Send Order to Dad</button>
@@ -225,17 +520,16 @@ footer {
 <footer>Love, Dad 🤎✝️</footer>
 
 <script>
-// ✅ FIXED BUTTON HANDLER
 function change(id, delta) {
   const el = document.getElementById(id);
   if (!el) return;
+  // Parse safely (handles NaN, empty text, or stray spaces)
   let count = parseInt(el.textContent.trim() || "0", 10);
   count = isNaN(count) ? 0 : count + delta;
   if (count < 0) count = 0;
   el.textContent = count.toString();
 }
 
-// ✅ UTILITIES (unchanged)
 function getChecked(containerId) {
   const container = document.getElementById(containerId);
   if (!container) return [];
@@ -243,7 +537,6 @@ function getChecked(containerId) {
   return Array.from(checked).map(c => c.value);
 }
 
-// ✅ CLEAR BUTTON
 document.getElementById('clear').onclick = function() {
   document.querySelectorAll('.qty').forEach(el => el.textContent = '0');
   document.querySelectorAll('textarea').forEach(el => el.value = '');
@@ -251,11 +544,10 @@ document.getElementById('clear').onclick = function() {
   document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
 };
 
-// ✅ SEND BUTTON (unchanged from your version)
 document.getElementById('send').onclick = function() {
-  let msg = 'Hi Dad! Here\'s my order for today:%0A%0A';
+  let msg = 'Hi Dad! Here's my order for today:%0A%0A';
   let hasItems = false;
-
+  
   const items = [
     {id:'oatmeal', name:'Cinnamon Apple Oatmeal'},
     {id:'yogurt', name:'Vanilla Greek Yogurt'},
@@ -287,60 +579,69 @@ document.getElementById('send').onclick = function() {
     {id:'smoothie', name:'Strawberry & Pineapple Smoothie'},
     {id:'starbucks', name:'Starbucks (Custom)', textarea:'starbucksOrder'}
   ];
-
+  
   items.forEach(function(item) {
     const el = document.getElementById(item.id);
     const qty = parseInt(el.textContent);
+    
     if (qty > 0) {
       hasItems = true;
       msg += item.name + ': ' + qty + '%0A';
+      
       if (item.select) {
         const sel = document.getElementById(item.select);
         if (sel) msg += '  - ' + sel.value + '%0A';
       }
+      
       if (item.selects) {
         item.selects.forEach(function(selectId) {
           const sel = document.getElementById(selectId);
           if (sel) msg += '  - ' + sel.value + '%0A';
         });
       }
+      
       if (item.checkGroup) {
         const opts = getChecked(item.checkGroup);
         if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
       }
+      
       if (item.checks) {
         const checked = document.querySelectorAll(item.checks);
         const opts = Array.from(checked).map(function(c) { return c.value; });
         if (opts.length > 0) msg += '  - With: ' + opts.join(', ') + '%0A';
       }
+      
       if (item.checkbox) {
         const chk = document.getElementById(item.checkbox);
         if (chk && chk.checked) msg += '  - Add Marshmallows%0A';
       }
+      
       if (item.texts) {
         item.texts.forEach(function(textId) {
           const txt = document.getElementById(textId);
           if (txt && txt.value.trim()) msg += '  - ' + txt.value.trim() + '%0A';
         });
       }
+      
       if (item.textarea) {
         const txt = document.getElementById(item.textarea);
         if (txt && txt.value.trim()) msg += '  - ' + txt.value.trim() + '%0A';
       }
+      
       msg += '%0A';
     }
   });
-
+  
   const note = document.getElementById('note').value.trim();
   if (note) {
     msg += 'SPECIAL NOTES:%0A' + note + '%0A';
   }
-
+  
   if (!hasItems) {
     alert('Please add at least one item to your order!');
     return;
   }
-
+  
   msg += '%0ALove you Dad! 💛';
   window.location.href = 'sms:2089540655&body=' + msg;
 };
