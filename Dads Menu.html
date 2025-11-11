@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kid Menu Order - Aloha Edition</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen;
+    background: linear-gradient(to bottom, #fdf6e3, #fefaf1);
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  header {
+    text-align: center;
+    padding: 20px;
+    background: #f4c57a;
+    color: #3b2e06;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  h2 {
+    background: #ffdcb2;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  .section {
+    margin: 15px;
+    padding: 10px;
+    background: #fff8ee;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+  }
+  button {
+    border: none;
+    background: #4da6ff;
+    color: white;
+    font-size: 1.2em;
+    padding: 5px 10px;
+    border-radius: 8px;
+  }
+  button:active {
+    background: #1e90ff;
+  }
+  #note {
+    width: 90%;
+    height: 60px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 1em;
+  }
+  #send, #clear {
+    width: 90%;
+    display: block;
+    margin: 15px auto;
+    font-size: 1.2em;
+    padding: 12px;
+    border-radius: 12px;
+  }
+  #send { background: #008060; color: white; }
+  #clear { background: #e57373; color: white; }
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 1em;
+    color: #5c4033;
+  }
+  #splash {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, #f4c57a, #ffdcb2);
+    color: #3b2e06;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    z-index: 10;
+    animation: fadeOut 2s ease 2s forwards;
+  }
+  @keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+</style>
+</head>
+<body>
+<div id="splash">Aloha 🤎 Welcome to Dad’s Kitchen!</div>
+<header>“Whatever you do, do it from the heart, as something done for the Lord.” — Colossians 3:23</header>
+
+<div class="section">
+  <h2>🥞 Breakfast Blessings</h2>
+  <div class="item"><span>Oatmeal</span><div><button onclick="updateItem('Oatmeal',-1)">−</button> <span id="Oatmeal">0</span> <button onclick="updateItem('Oatmeal',1)">+</button></div></div>
+  <div class="item"><span>Yogurt + Granola</span><div><button onclick="updateItem('Yogurt',-1)">−</button> <span id="Yogurt">0</span> <button onclick="updateItem('Yogurt',1)">+</button></div></div>
+  <div class="item"><span>Toast + Eggs</span><div><button onclick="updateItem('Toast',-1)">−</button> <span id="Toast">0</span> <button onclick="updateItem('Toast',1)">+</button></div></div>
+  <div class="item"><span>Pancakes</span><div><button onclick="updateItem('Pancakes',-1)">−</button> <span id="Pancakes">0</span> <button onclick="updateItem('Pancakes',1)">+</button></div></div>
+</div>
+
+<div class="section">
+  <h2>🥪 Lunch Roundup</h2>
+  <div class="item"><span>Sandwich</span><div><button onclick="updateItem('Sandwich',-1)">−</button> <span id="Sandwich">0</span> <button onclick="updateItem('Sandwich',1)">+</button></div></div>
+  <div class="item"><span>Quesadilla</span><div><button onclick="updateItem('Quesadilla',-1)">−</button> <span id="Quesadilla">0</span> <button onclick="updateItem('Quesadilla',1)">+</button></div></div>
+  <div class="item"><span>Spring Rolls</span><div><button onclick="updateItem('SpringRolls',-1)">−</button> <span id="SpringRolls">0</span> <button onclick="updateItem('SpringRolls',1)">+</button></div></div>
+  <div class="item"><span>Mac & Cheese</span><div><button onclick="updateItem('MacCheese',-1)">−</button> <span id="MacCheese">0</span> <button onclick="updateItem('MacCheese',1)">+</button></div></div>
+</div>
+
+<div class="section">
+  <h2>🍎 Snack Shack</h2>
+  <div class="item"><span>Fruit Cup</span><div><button onclick="updateItem('Fruit',-1)">−</button> <span id="Fruit">0</span> <button onclick="updateItem('Fruit',1)">+</button></div></div>
+  <div class="item"><span>String Cheese</span><div><button onclick="updateItem('Cheese',-1)">−</button> <span id="Cheese">0</span> <button onclick="updateItem('Cheese',1)">+</button></div></div>
+  <div class="item"><span>Jerky</span><div><button onclick="updateItem('Jerky',-1)">−</button> <span id="Jerky">0</span> <button onclick="updateItem('Jerky',1)">+</button></div></div>
+  <div class="item"><span>Nuts</span><div><button onclick="updateItem('Nuts',-1)">−</button> <span id="Nuts">0</span> <button onclick="updateItem('Nuts',1)">+</button></div></div>
+</div>
+
+<div class="section">
+  <h2>🥤 Drinks & Refills</h2>
+  <div class="item"><span>Milk</span><div><button onclick="updateItem('Milk',-1)">−</button> <span id="Milk">0</span> <button onclick="updateItem('Milk',1)">+</button></div></div>
+  <div class="item"><span>Water</span><div><button onclick="updateItem('Water',-1)">−</button> <span id="Water">0</span> <button onclick="updateItem('Water',1)">+</button></div></div>
+  <div class="item"><span>Juice</span><div><button onclick="updateItem('Juice',-1)">−</button> <span id="Juice">0</span> <button onclick="updateItem('Juice',1)">+</button></div></div>
+  <div class="item"><span>Smoothie</span><div><button onclick="updateItem('Smoothie',-1)">−</button> <span id="Smoothie">0</span> <button onclick="updateItem('Smoothie',1)">+</button></div></div>
+</div>
+
+<textarea id="note" placeholder="Add note for Dad (extra syrup, cook this, etc.)"></textarea>
+<button id="send" onclick="sendOrder()">Send Order</button>
+<button id="clear" onclick="clearOrder()">Clear Order</button>
+<footer>Love Dad 🤎✝️</footer>
+
+<script>
+function updateItem(item, change) {
+  const el = document.getElementById(item);
+  let count = parseInt(el.textContent) + change;
+  if (count < 0) count = 0;
+  el.textContent = count;
+}
+function sendOrder() {
+  const items = ['Oatmeal','Yogurt','Toast','Pancakes','Sandwich','Quesadilla','SpringRolls','MacCheese','Fruit','Cheese','Jerky','Nuts','Milk','Water','Juice','Smoothie'];
+  let message = 'Hi Dad! Here’s my order for today:%0A';
+  items.forEach(item => {
+    const count = document.getElementById(item).textContent;
+    if (count > 0) {
+      message += `${item.replace(/([A-Z])/g, ' $1')}: ${count}%0A`;
+    }
+  });
+  const note = document.getElementById('note').value.trim();
+  if (note) message += `%0ANotes: ${note}`;
+  window.location.href = `sms:2089540655&body=${message}`;
+}
+function clearOrder() {
+  document.querySelectorAll('span[id]').forEach(el => el.textContent = '0');
+  document.getElementById('note').value = '';
+}
+</script>
+</body>
+</html>
